@@ -18,7 +18,6 @@ class CustomMessageConverter(private val objectMapper: ObjectMapper) : MessageCo
     override fun fromMessage(message: Message): Any {
         val mapper = ObjectMapper().registerModule(KotlinModule.Builder().build())
         return try {
-            println(message.messageProperties.consumerQueue)
             when(message.messageProperties.consumerQueue){
                 SEARCH_BOOKS -> objectMapper.readValue(message.body, object : TypeReference<SearchDto<BookDto>>() {})
                 else -> {objectMapper.readValue(message.body, object : TypeReference<SearchDto<IsbnDto>>() {})}
