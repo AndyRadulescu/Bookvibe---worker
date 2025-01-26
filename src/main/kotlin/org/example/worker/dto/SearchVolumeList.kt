@@ -12,7 +12,7 @@ data class SearchVolumeList(val kind: String, val totalItems: Int, val items: Li
             val saleInfo: SaleInfoDto,
             val userInfo: UserInfo?,
             val accessInfo: AccessInfoDto,
-            val searchInfo: SearchInfoDto) {
+            val searchInfo: SearchInfoDto?) {
 
         data class VolumeInfoDto(
                 val title: String,
