@@ -9,7 +9,7 @@ data class SearchVolumeList(val kind: String, val totalItems: Int, val items: Li
             val etag: String,
             val selfLink: String,
             val volumeInfo: VolumeInfoDto,
-            val saleInfo: SaleInfoDto,
+            val saleInfo: SaleInfoDto?,
             val userInfo: UserInfo?,
             val accessInfo: AccessInfoDto,
             val searchInfo: SearchInfoDto?) {
@@ -19,7 +19,7 @@ data class SearchVolumeList(val kind: String, val totalItems: Int, val items: Li
                 val subtitle: String?,
                 val authors: List<String>,
                 val publisher: String?,
-                val publishedDate: String,
+                val publishedDate: String?,
                 val description: String?,
                 val industryIdentifiers: List<IndustryIdentifiersDto>,
                 val readingModes: ReadingModesDto?,
@@ -108,11 +108,11 @@ data class SearchVolumeList(val kind: String, val totalItems: Int, val items: Li
             )
         }
 
-        data class SearchInfoDto(val textSnippet: String)
+        data class SearchInfoDto(val textSnippet: String?)
     }
 
     data class Price(
-            val amount: Number,
-            val currency: Number
+            val amount: Number?,
+            val currency: Number?
     )
 }
