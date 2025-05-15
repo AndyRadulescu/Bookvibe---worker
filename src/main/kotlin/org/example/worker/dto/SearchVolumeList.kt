@@ -17,13 +17,13 @@ data class SearchVolumeList(val kind: String, val totalItems: Int, val items: Li
         data class VolumeInfoDto(
                 val title: String,
                 val subtitle: String?,
-                val authors: List<String>,
+                val authors: List<String>?,
                 val publisher: String?,
                 val publishedDate: String?,
                 val description: String?,
-                val industryIdentifiers: List<IndustryIdentifiersDto>,
+                val industryIdentifiers: List<IndustryIdentifiersDto>?,
                 val readingModes: ReadingModesDto?,
-                val pageCount: Number,
+                val pageCount: Number?,
                 val dimensions: BookDimensions?,
                 val printType: String?,
                 val mainCategory: String?,
@@ -32,10 +32,10 @@ data class SearchVolumeList(val kind: String, val totalItems: Int, val items: Li
                 val ratingCount: Number?,
                 val contentVersion: String?,
                 val imageLinks: ImageLinks?,
-                val language: String,
-                val previewLink: String,
-                val infoLink: String,
-                val canonicalVolumeLink: String
+                val language: String?,
+                val previewLink: String?,
+                val infoLink: String?,
+                val canonicalVolumeLink: String?
         ) {
             data class ImageLinks(
                     val smallThumbnail: String?,

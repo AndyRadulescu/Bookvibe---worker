@@ -31,6 +31,7 @@ class SearchBookController(private val bookService: SearchBookService, private v
         return searchedVolumeListFlux.blockFirst()
     }
 
+    //TODO: change isbn to volume id
     @RabbitListener(queues = [ISBN])
     fun consumeMessagesIsbn(message: SearchDto<IsbnDto>): SearchVolumeList? {
         println(message)

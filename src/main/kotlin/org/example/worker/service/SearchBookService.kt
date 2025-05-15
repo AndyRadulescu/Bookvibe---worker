@@ -21,7 +21,7 @@ class SearchBookService() {
     fun searchBook(bookName: String): Flux<SearchVolumeList> {
         return WebClient.create()
                 .get()
-                .uri("${GOOGLE_BOOKS_API_URL}${bookName}&limit=${limit}&key=${apiKey}")
+                .uri("${GOOGLE_BOOKS_API_URL}${SEARCH}${bookName}&orderBy=relevance&limit=${limit}&key=${apiKey}")
                 .retrieve()
                 .bodyToFlux<SearchVolumeList>()
     }
@@ -32,6 +32,14 @@ class SearchBookService() {
                 .uri("${GOOGLE_BOOKS_API_URL}isbn:${isbn}&key=${apiKey}")
                 .retrieve()
                 .bodyToMono<SearchVolumeList>()
+    }
+
+    fun getBookByVolumeId(volumeId: String): Mono<SearchVolumeList> {
+        return WebClient.create()
+            .get()
+            .uri("${GOOGLE_BOOKS_API_URL}/${volumeId}&key=${apiKey}")
+            .retrieve()
+            .bodyToMono<SearchVolumeList>()
     }
 
     companion object {
