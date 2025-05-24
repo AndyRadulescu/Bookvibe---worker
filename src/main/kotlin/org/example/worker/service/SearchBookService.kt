@@ -16,35 +16,29 @@ class SearchBookService() {
     private val apiKey: String? = null
 
     @Value("\${books.api.limit}")
-    private val limit: String? = null
+    private val limit: Int = 10
 
-    fun searchBook(bookName: String): Flux<SearchVolumeList> {
+    fun searchBook(bookName: String, page: Int = 1): Mono<SearchVolumeList> {
+        val startIndex = 0 + (page - 1) * limit
+        val upperLimit = page * limit
         return WebClient.create()
-                .get()
-                .uri("${GOOGLE_BOOKS_API_URL}${SEARCH}${bookName}&orderBy=relevance&limit=${limit}&key=${apiKey}")
-                .retrieve()
-                .bodyToFlux<SearchVolumeList>()
-    }
-
-    fun getBookByIsbn(isbn: String): Mono<SearchVolumeList> {
-        return WebClient.create()
-                .get()
-                .uri("${GOOGLE_BOOKS_API_URL}isbn:${isbn}&key=${apiKey}")
-                .retrieve()
-                .bodyToMono<SearchVolumeList>()
+            .get()
+            .uri("$GOOGLE_BOOKS_API_URL$SEARCH$bookName&orderBy=relevance&limit=$upperLimit&startIndex=$startIndex&key=$apiKey")
+            .retrieve()
+            .bodyToMono<SearchVolumeList>()
     }
 
     fun getBookByVolumeId(volumeId: String): Mono<SearchVolumeList> {
         return WebClient.create()
             .get()
-            .uri("${GOOGLE_BOOKS_API_URL}/${volumeId}&key=${apiKey}")
+            .uri("$GOOGLE_BOOKS_API_URL$SEARCH/$volumeId&key=$apiKey")
             .retrieve()
             .bodyToMono<SearchVolumeList>()
     }
 
     companion object {
 
-        private const val GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes?q="
+        private const val GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes"
         private const val SEARCH = "?q="
     }
 }
