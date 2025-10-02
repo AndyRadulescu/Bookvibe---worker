@@ -4,9 +4,7 @@ import org.example.worker.dto.SearchVolumeList
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.bodyToFlux
 import org.springframework.web.reactive.function.client.bodyToMono
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
@@ -23,7 +21,7 @@ class SearchBookService() {
         val upperLimit = page * limit
         return WebClient.create()
             .get()
-            .uri("$GOOGLE_BOOKS_API_URL$SEARCH$bookName&orderBy=relevance&limit=$upperLimit&startIndex=$startIndex&key=$apiKey")
+            .uri("$GOOGLE_BOOKS_API_URL$SEARCH$bookName&limit=$upperLimit&startIndex=$startIndex&key=$apiKey")
             .retrieve()
             .bodyToMono<SearchVolumeList>()
     }
