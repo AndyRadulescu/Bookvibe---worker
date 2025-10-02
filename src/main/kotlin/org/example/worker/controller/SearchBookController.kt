@@ -14,7 +14,7 @@ class SearchBookController(private val bookService: SearchBookService) {
     }
 
     @GetMapping("/worker/volume/{id}")
-    fun searchBookById(@PathVariable id: String): Mono<SearchVolumeList> {
+    fun searchBookById(@PathVariable id: String): Mono<SearchVolumeList.VolumeDto> {
         println("Log call: /worker/volume/$id")
         return bookService.getBookByVolumeId(id)
     }

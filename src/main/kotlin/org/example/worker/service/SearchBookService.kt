@@ -21,17 +21,17 @@ class SearchBookService() {
         val upperLimit = page * limit
         return WebClient.create()
             .get()
-            .uri("$GOOGLE_BOOKS_API_URL$SEARCH$bookName&limit=$upperLimit&startIndex=$startIndex&key=$apiKey")
+            .uri("$GOOGLE_BOOKS_API_URL$SEARCH$bookName&orderBy=relevance&limit=$upperLimit&startIndex=$startIndex&key=$apiKey")
             .retrieve()
             .bodyToMono<SearchVolumeList>()
     }
 
-    fun getBookByVolumeId(volumeId: String): Mono<SearchVolumeList> {
+    fun getBookByVolumeId(volumeId: String): Mono<SearchVolumeList.VolumeDto> {
         return WebClient.create()
             .get()
-            .uri("$GOOGLE_BOOKS_API_URL$SEARCH/$volumeId&key=$apiKey")
+            .uri("$GOOGLE_BOOKS_API_URL/$volumeId")
             .retrieve()
-            .bodyToMono<SearchVolumeList>()
+            .bodyToMono<SearchVolumeList.VolumeDto>()
     }
 
     companion object {
