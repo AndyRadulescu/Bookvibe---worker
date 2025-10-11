@@ -2,7 +2,7 @@ package org.example.worker.dto
 
 import java.util.*
 
-data class SearchVolumeList(val kind: String, val totalItems: Int, val items: List<VolumeDto>) {
+data class GoogleSearchVolumeList(val kind: String, val totalItems: Int, val items: List<VolumeDto>) {
     data class VolumeDto(
             val kind: String,
             val id: String,
@@ -31,6 +31,7 @@ data class SearchVolumeList(val kind: String, val totalItems: Int, val items: Li
                 val averageRating: Number?,
                 val ratingCount: Number?,
                 val contentVersion: String?,
+                val maturityRating: String,
                 val imageLinks: ImageLinks?,
                 val language: String?,
                 val previewLink: String?,
@@ -45,8 +46,6 @@ data class SearchVolumeList(val kind: String, val totalItems: Int, val items: Li
                     val large: String?,
                     val extraLarge: String?
             )
-
-            data class IndustryIdentifiersDto(val type: String, val identifier: String)
             data class ReadingModesDto(val text: Boolean, val image: Boolean)
             data class BookDimensions(
                     val height: String?,
