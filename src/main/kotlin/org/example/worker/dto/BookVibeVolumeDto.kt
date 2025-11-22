@@ -17,3 +17,4 @@ data class BookVibeVolumeDto (
     val imageLink: String,
     val language: String?
 )
+
